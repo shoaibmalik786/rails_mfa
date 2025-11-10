@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2025-11-10
+
+### Fixed
+- RuboCop linting offenses resolved
+- Added RubyGems MFA requirement metadata for enhanced security
+- Fixed unused block arguments in test files
+- Improved code formatting and readability
+
+## [0.1.0] - 2025-11-06
+
 ### Added
 - Rails generators for easy installation and setup
   - `rails generate rails_mfa:install` - Creates initializer with configuration examples
@@ -17,8 +27,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Complete authenticator app (TOTP) setup guide with QR code generation
 - Dedicated controller examples for authenticator app setup flow
 - Improved README emphasizing provider-agnostic nature
-
-## [0.1.0] - 2025-11-06
 
 ### Added
 - Initial release of RailsMFA gem
