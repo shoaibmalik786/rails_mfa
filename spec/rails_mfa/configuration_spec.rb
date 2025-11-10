@@ -18,13 +18,13 @@ RSpec.describe RailsMFA::Configuration do
 
   describe "attribute accessors" do
     it "allows setting sms_provider" do
-      provider = ->(to, msg) { "sent to #{to}" }
+      provider = ->(to, _msg) { "sent to #{to}" }
       config.sms_provider = provider
       expect(config.sms_provider).to eq(provider)
     end
 
     it "allows setting email_provider" do
-      provider = ->(to, subject, body) { "emailed #{to}" }
+      provider = ->(to, _subject, _body) { "emailed #{to}" }
       config.email_provider = provider
       expect(config.email_provider).to eq(provider)
     end

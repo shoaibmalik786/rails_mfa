@@ -22,7 +22,7 @@ RSpec.describe RailsMFA do
     it "allows configuration with provider lambdas" do
       RailsMFA.configure do |c|
         c.sms_provider = ->(to, message) { "sms:#{to}:#{message}" }
-        c.email_provider = ->(to, subject, body) { "email:#{to}:#{subject}" }
+        c.email_provider = ->(to, subject, _body) { "email:#{to}:#{subject}" }
       end
 
       expect(RailsMFA.configuration.sms_provider.call("123", "hi")).to include("sms:123")
@@ -31,7 +31,7 @@ RSpec.describe RailsMFA do
 
     it "creates a configuration if none exists" do
       RailsMFA.configuration = nil
-      RailsMFA.configure { }
+      RailsMFA.configure {}
 
       expect(RailsMFA.configuration).to be_a(RailsMFA::Configuration)
     end
@@ -43,4 +43,3 @@ RSpec.describe RailsMFA do
     end
   end
 end
-

@@ -17,7 +17,7 @@ RSpec.describe RailsMFA::TokenManager do
       code = token_manager.generate_numeric_code(user_id, length: 4)
       expect(code.length).to eq(4)
       expect(code.to_i).to be >= 1000
-      expect(code.to_i).to be < 10000
+      expect(code.to_i).to be < 10_000
     end
 
     it "stores the code in the cache with proper key" do

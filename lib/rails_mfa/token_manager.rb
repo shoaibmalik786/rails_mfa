@@ -1,6 +1,7 @@
 # frozen_string_literal: true
-require 'securerandom'
-require 'active_support/security_utils'
+
+require "securerandom"
+require "active_support/security_utils"
 
 module RailsMFA
   class TokenManager
@@ -8,7 +9,8 @@ module RailsMFA
       @store = store
     end
 
-    def generate_numeric_code(user_id, length: RailsMFA.configuration.code_length, expiry: RailsMFA.configuration.code_expiry_seconds)
+    def generate_numeric_code(user_id, length: RailsMFA.configuration.code_length,
+                              expiry: RailsMFA.configuration.code_expiry_seconds)
       min = 10**(length - 1)
       max = (10**length) - 1
       code = rand(min..max).to_s

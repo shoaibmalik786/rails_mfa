@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-require 'cgi'
+
+require "cgi"
 
 RSpec.describe RailsMFA::Model do
   # Create a test user class that includes the Model concern
@@ -176,7 +177,7 @@ RSpec.describe RailsMFA::Model do
       skip "class_attribute not available" unless user_class.respond_to?(:class_attribute)
 
       user_class.enable_mfa_for(:sms, :email, :totp)
-      expect(user_class.rails_mfa_methods).to eq([:sms, :email, :totp])
+      expect(user_class.rails_mfa_methods).to eq(%i[sms email totp])
     end
 
     it "can be called without error when class_attribute is available" do

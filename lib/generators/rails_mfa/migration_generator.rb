@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'rails/generators/base'
-require 'rails/generators/active_record'
+require "rails/generators/base"
+require "rails/generators/active_record"
 
 module RailsMfa
   module Generators
@@ -13,7 +13,7 @@ module RailsMfa
       desc "Generates a migration to add MFA columns to a model"
 
       argument :name, type: :string, default: "User",
-               desc: "The name of the model to add MFA columns to (e.g., User, Account)"
+                      desc: "The name of the model to add MFA columns to (e.g., User, Account)"
 
       def self.next_migration_number(dirname)
         ActiveRecord::Generators::Base.next_migration_number(dirname)

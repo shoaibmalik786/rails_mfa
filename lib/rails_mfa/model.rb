@@ -1,7 +1,8 @@
 # frozen_string_literal: true
-require 'active_support/concern'
-require 'rotp'
-require 'rqrcode'
+
+require "active_support/concern"
+require "rotp"
+require "rqrcode"
 
 module RailsMFA
   module Model
@@ -17,17 +18,19 @@ module RailsMFA
     def generate_totp_secret!
       secret = ROTP::Base32.random_base32
       # host app should store secret encrypted in a column like :mfa_secret
-      self.update!(mfa_secret: secret) if respond_to?(:update!)
+      update!(mfa_secret: secret) if respond_to?(:update!)
       secret
     end
 
     def totp_provisioning_uri(issuer: "RailsMFA")
       raise "No mfa_secret present" unless respond_to?(:mfa_secret) && mfa_secret
-      ROTP::TOTP.new(mfa_secret, issuer: issuer).provisioning_uri(self.respond_to?(:email) ? email : "user")
+
+      ROTP::TOTP.new(mfa_secret, issuer: issuer).provisioning_uri(respond_to?(:email) ? email : "user")
     end
 
     def verify_totp(code)
       return false unless respond_to?(:mfa_secret) && mfa_secret
+
       totp = ROTP::TOTP.new(mfa_secret)
       totp.verify(code, drift_behind: 30)
     end
@@ -38,9 +41,11 @@ module RailsMFA
       case via.to_sym
       when :sms
         raise "sms_provider not configured" unless RailsMFA.configuration.sms_provider
+
         RailsMFA.configuration.sms_provider.call(phone_number_for_sms, "Your verification code is: #{code}")
       when :email
         raise "email_provider not configured" unless RailsMFA.configuration.email_provider
+
         RailsMFA.configuration.email_provider.call(email, "Your verification code", "Code: #{code}")
       else
         raise "Unsupported channel"

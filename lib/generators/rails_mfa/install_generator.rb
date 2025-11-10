@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'rails/generators/base'
+require "rails/generators/base"
 
 module RailsMfa
   module Generators

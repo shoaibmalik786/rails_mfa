@@ -31,6 +31,7 @@ module RailsMFA
       entry = @store[key]
       return nil unless entry
       return nil if entry[:expires_at] && Time.now > entry[:expires_at]
+
       entry[:value]
     end
 

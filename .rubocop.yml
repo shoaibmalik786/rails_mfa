@@ -1,5 +1,52 @@
 AllCops:
+  NewCops: enable
   TargetRubyVersion: 3.1
+  SuggestExtensions: false
+  Exclude:
+    - 'bin/**/*'
+    - 'vendor/**/*'
+    - 'tmp/**/*'
+
+# Spec files naturally have longer blocks for describing test scenarios
+# Gemspec naturally has a long block
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*_spec.rb'
+    - 'spec/spec_helper.rb'
+    - '*.gemspec'
+
+# Gemspec can have longer lines for descriptions
+Layout/LineLength:
+  Max: 120
+  Exclude:
+    - '*.gemspec'
+    - 'Gemfile'
+
+# Allow longer method names in specs and model methods that handle multiple cases
+Metrics/MethodLength:
+  Exclude:
+    - 'spec/**/*'
+    - 'lib/rails_mfa/model.rb'
+
+# Allow more complex code in specs and model methods
+Metrics/AbcSize:
+  Exclude:
+    - 'spec/**/*'
+    - 'lib/rails_mfa/model.rb'
+
+# Documentation can be added later - focus on functionality first
+Style/Documentation:
+  Enabled: false
+
+# Empty blocks in specs are intentional for testing edge cases
+Lint/EmptyBlock:
+  Exclude:
+    - 'spec/**/*'
+
+# Provider initialize methods don't need super
+Lint/MissingSuper:
+  Exclude:
+    - 'lib/rails_mfa/providers/*.rb'
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
