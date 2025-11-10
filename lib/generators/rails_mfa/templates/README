@@ -1,0 +1,34 @@
+===============================================================================
+
+RailsMFA has been installed!
+
+Next steps:
+
+1. Add MFA columns to your User model:
+
+   rails generate rails_mfa:migration User
+
+2. Run the migration:
+
+   rails db:migrate
+
+3. Configure your SMS and Email providers in:
+
+   config/initializers/rails_mfa.rb
+
+4. Include RailsMFA::Model in your User model:
+
+   # app/models/user.rb
+   class User < ApplicationRecord
+     include RailsMFA::Model
+
+     # Optionally specify which MFA methods are supported
+     enable_mfa_for :sms, :email, :totp
+   end
+
+5. Add routes and controllers for MFA verification (see documentation)
+
+For detailed usage instructions, visit:
+https://github.com/shoaibmalik786/rails_mfa
+
+===============================================================================
